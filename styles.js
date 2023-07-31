@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     width: '90%'
   },
   postProfilePicture: {
-    height: 270,
+    height: 230,
     borderRadius: 30,
     overflow: 'hidden',
     //marginVertical: 10,
@@ -67,6 +67,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'green',
+  },
+  loadMore: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 10, marginBottom: 10,
+    fontSize: 20,
     color: 'green',
   },
 });

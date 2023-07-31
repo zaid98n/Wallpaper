@@ -1,17 +1,10 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, TextInput, ScrollView, TouchableOpacity, Alert, Modal, Dimensions, Platform } from 'react-native';
-import { MaterialIcons } from 'react-native-vector-icons';
+import { Text, View, Image, ScrollView, TouchableOpacity, Modal, Dimensions } from 'react-native';
 import styles from '../../styles';
-import { v4 as uuidv4 } from 'uuid';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { FontAwesome } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
-// import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
-import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
 import FullScreenImage from './FullScreenImage';
 
 const Home = () => {
@@ -21,7 +14,8 @@ const Home = () => {
   const screenWidth = Dimensions.get('window').width;
 
   const [photos, setPhotos] = useState([]);
-  //const screenWidth = Dimensions.get('window').width; // Get the screen width
+
+  const [loadedPhotos, setLoadedPhotos] = useState(5);
 
   const openFullScreen = (photo) => {
     setSelectedPhoto(photo);
@@ -32,10 +26,9 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetch('https://api.slingacademy.com/v1/sample-data/photos')
+    fetch(`https://api.slingacademy.com/v1/sample-data/photos?limit=${loadedPhotos}`)
       .then((response) => response.json())
       .then((data) => {
-        // Assuming the API response is an object with a photos property
         if (data.photos && Array.isArray(data.photos)) {
           setPhotos(data.photos);
         }
@@ -43,10 +36,13 @@ const Home = () => {
       .catch((error) => {
         console.error('Error fetching images:', error);
       });
-  }, []);
+  }, [loadedPhotos]);
+
+  const handleLoadMore = () => {
+    setLoadedPhotos((prevLoadedPhotos) => prevLoadedPhotos + 5);
+  };
 
   const handleReport = (photo) => {
-    // Implement the logic for reporting the image here
     console.log('Reporting image:', photo.id);
   };
 
@@ -61,44 +57,35 @@ const Home = () => {
         console.error('Media library permission denied.');
         return;
       }
-  
+
       const downloadDir = `${FileSystem.documentDirectory}Wallpapers/`;
       const dirInfo = await FileSystem.getInfoAsync(downloadDir);
       if (!dirInfo.exists) {
         await FileSystem.makeDirectoryAsync(downloadDir, { intermediates: true });
       }
-  
+
       const downloadResult = await FileSystem.downloadAsync(photo.url, downloadDir + `${photo.id}.jpg`, {});
-  
+
       const asset = await MediaLibrary.createAssetAsync(downloadResult.uri);
       console.log('Downloaded image saved to media library:', asset.uri);
-      
-    //   if (Constants.isDevice && Platform.OS === 'android') {
-    //     const localNotification = {
-    //       title: 'Download Complete',
-    //       body: 'The image has been successfully downloaded to your gallery.',
-    //     };
-  
-    //     await Notifications.presentNotificationAsync(localNotification);
-    //   }
 
-        setDownloadSuccess(true);
-        setTimeout(() => setDownloadSuccess(false), 1000);
+      setDownloadSuccess(true);
+      setTimeout(() => setDownloadSuccess(false), 1000);
     } catch (error) {
       console.error('Error downloading image:', error);
     }
   };
 
-  
+
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      
+
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
-      <View>
-        <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, color: 'green' }}>Latest Wallpapers</Text>
-      </View>
+        <View>
+          <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, color: 'green' }}>Latest Wallpapers</Text>
+        </View>
         {photos.length > 0 ? (
           photos.map((photo) => (
             <View key={photo.id} style={styles.imageContainer}>
@@ -124,6 +111,9 @@ const Home = () => {
         ) : (
           <Text>Loading...</Text>
         )}
+        <TouchableOpacity onPress={handleLoadMore}>
+          <Text style={styles.loadMore} >Load More</Text>
+        </TouchableOpacity>
       </ScrollView>
       {downloadSuccess && (
         <Modal animationType="fade" transparent visible={downloadSuccess}>
