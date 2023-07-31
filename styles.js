@@ -70,11 +70,17 @@ const styles = StyleSheet.create({
     color: 'green',
   },
   loadMore: {
+    padding: 7,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 10, marginBottom: 10,
+    //marginTop: 10, 
+    marginBottom: 20,
     fontSize: 20,
-    color: 'green',
+    color: 'white',
+    backgroundColor: 'green',
+    //borderColor: 'Black',
+    //borderWidth: 2,
+    borderRadius: 50,
   },
 });
 
