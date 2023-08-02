@@ -25,11 +25,20 @@ const Home = () => {
     setSelectedPhoto(null);
   };
 
+  const API_KEY = 'Z2czjJRDYYfOQIHRlsrFU8KjeQCnUOgz591mdW2WnibUuEjkKWcmrqVE'; // Replace with your Pexels API key
+  const BASE_URL = 'https://api.pexels.com/v1/search';
+  const QUERY = 'nature';
+  const PER_PAGE = 5; // Load 5 photos per page
+
   useEffect(() => {
-    fetch(`https://api.slingacademy.com/v1/sample-data/photos?limit=${loadedPhotos}`)
+    fetch(`${BASE_URL}?query=${QUERY}&per_page=${loadedPhotos}`, {
+      headers: {
+        Authorization: API_KEY,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
-        if (data.photos && Array.isArray(data.photos)) {
+        if (data.photos && data.photos.length > 0) {
           setPhotos(data.photos);
         }
       })
@@ -64,7 +73,7 @@ const Home = () => {
         await FileSystem.makeDirectoryAsync(downloadDir, { intermediates: true });
       }
 
-      const downloadResult = await FileSystem.downloadAsync(photo.url, downloadDir + `${photo.id}.jpg`, {});
+      const downloadResult = await FileSystem.downloadAsync(photo.src.original, downloadDir + `${photo.id}.jpg`, {});
 
       const asset = await MediaLibrary.createAssetAsync(downloadResult.uri);
       console.log('Downloaded image saved to media library:', asset.uri);
@@ -91,7 +100,8 @@ const Home = () => {
             <View key={photo.id} style={styles.imageContainer}>
               <TouchableOpacity onPress={() => openFullScreen(photo)} style={[styles.postProfilePicture, { width: getImageWidthPercentage(90) }]}>
                 <Image
-                  source={{ uri: photo.url }}
+                  //source={{ uri: photo.download_url }}
+                  source={{ uri: photo.src.large }}
                   style={styles.image}
                   onError={(error) => console.error('Error loading image:', error)}
                 />
@@ -127,7 +137,7 @@ const Home = () => {
 
       {selectedPhoto && (
         <FullScreenImage
-          imageUrl={selectedPhoto.url}
+          imageUrl={selectedPhoto.src.large2x}
           onClose={closeFullScreen}
         />
       )}
