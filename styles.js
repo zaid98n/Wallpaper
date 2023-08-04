@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    backgroundColor: 'yellow', // Black background for each image and buttons
+    backgroundColor: 'rgba(0, 0, 0, 0.1)', // Black background for each image and buttons
     marginVertical: 15,
     borderRadius: 30,
     width: '90%'
@@ -82,6 +82,20 @@ const styles = StyleSheet.create({
     //borderWidth: 2,
     borderRadius: 50,
   },
+  CategoryName: {
+    position: 'absolute',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    //backgroundColor: 'rgba(0, 0, 0, 0.4)', // Add a background to improve text readability
+    color: 'white', // Adjust text color
+    fontWeight: 'bold',
+    fontSize: 40,
+    marginTop: '5%',
+    // marginBottom: '5%',
+    //margin: '12%',
+    //padding: 10, // Add padding for better styling
+    borderRadius: 10, // Add border radius for the background
+  }
 });
 
 

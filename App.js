@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './app/navigation/appNavigator';
+import StackNavigator from './app/navigation/StackNavigator';
 
 export default function App() {
     return <NavigationContainer>
