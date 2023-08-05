@@ -12,39 +12,8 @@ import styles from '../../styles'
 
 const Tab = createMaterialTopTabNavigator();
 
-// const AppNavigator = () => {
-//     return (
-//         <Tab.Navigator style={{ paddingTop: StatusBar.currentHeight }}>
-//             <Tab.Screen
-//                 options={{ 
-//                     title: ({ focused }) =>
-//                         <FontAwesome name="home" size={24}  color={focused ? 'orange' : 'black'} />
-//                 }}  component={Home} name='Home' />
-//             <Tab.Screen
-//                 options={{
-//                     title: ({ focused }) =>
-//                         <FontAwesome name="bars" size={24} color={focused ? 'blue' : 'black'} />
-//                 }} component={Feeds} name='Feeds' />
-//             {/* <Tab.Screen
-//                 options={{
-//                     title: ({ focused }) =>
-//                         <FontAwesome name="search" size={24} color={focused ? 'blue' : 'black'} />
-//                 }} component={Search} name='Search' /> */}
-//             {/* <Tab.Screen
-//                 options={{
-//                     title: ({ focused }) =>
-//                         <FontAwesome name="comments" size={24} color={focused ? 'blue' : 'black'} />
-//                 }} component={Chat} name='Chat' /> */}
-//         </Tab.Navigator>
-//     )
-// }
-
-// export default AppNavigator;
-
 const AppNavigator = () => {
     return (
-      <View style={{ flex: 1, backgroundColor: 'your-desired-color' }}>
-        <StatusBar translucent backgroundColor="transparent" />
         <Tab.Navigator style={{ paddingTop: StatusBar.currentHeight }}
           screenOptions={{
             "tabBarStyle": {
@@ -74,7 +43,6 @@ const AppNavigator = () => {
             name="Feeds"
           />
         </Tab.Navigator>
-      </View>
     );
   };
   

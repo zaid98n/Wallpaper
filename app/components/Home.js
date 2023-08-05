@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   const openFullScreen = (photo) => {
-    setSelectedPhoto(photo);
+    setSelectedPhoto(photo);1
   };
 
   const closeFullScreen = () => {
@@ -114,12 +114,12 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View>
+      {/* <View>
           <Text style={{ 
             fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, backgroundColor: '#323740',
             color: 'white', borderColor: '#246bfd', padding: 9, borderWidth: 0, borderRadius: 0}}>
               Latest Wallpapers</Text>
-        </View>
+        </View> */}
         <ScrollView
         ref={scrollViewRef} // Set the ref for the ScrollView
         contentContainerStyle={styles.scrollContentContainer}

@@ -33,16 +33,6 @@ const styles = StyleSheet.create({
     //marginVertical: 10,
     margin: 6,
   },
-  // loaderScreen: {
-  //   // width: 500,
-  //   // height: 500,
-  //   marginTop: '60%',
-  //   marginBottom:'100%',
-  // },
-  // loader: {
-  //   fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 40, backgroundColor: '#323740',
-  //           color: 'white', borderColor: '#246bfd', padding: 50, borderWidth: 0, borderRadius: 360
-  // },
   loaderScreen: {
     flex: 1,
     justifyContent: 'center',
