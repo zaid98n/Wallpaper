@@ -33,6 +33,28 @@ const styles = StyleSheet.create({
     //marginVertical: 10,
     margin: 6,
   },
+  // loaderScreen: {
+  //   // width: 500,
+  //   // height: 500,
+  //   marginTop: '60%',
+  //   marginBottom:'100%',
+  // },
+  // loader: {
+  //   fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 40, backgroundColor: '#323740',
+  //           color: 'white', borderColor: '#246bfd', padding: 50, borderWidth: 0, borderRadius: 360
+  // },
+  loaderScreen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '60%',
+    marginBottom:'100%',
+  },
+  loader: {
+    padding: 50,
+    backgroundColor: '#323740',
+    borderRadius: 360,
+  },
   image: {
     width: '100%',
     height: '100%',
@@ -97,7 +119,29 @@ const styles = StyleSheet.create({
     //margin: '12%',
     //padding: 10, // Add padding for better styling
     borderRadius: 10, // Add border radius for the background
-  }
+  },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 25,
+    borderRadius: 50,
+  },
+  paginationButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#246bfd',
+    borderRadius: 8,
+    marginHorizontal: 5,
+    borderRadius: 50,
+  },
+  paginationButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  disabledButton: {
+    backgroundColor: 'gray',
+  },
 });
 
 

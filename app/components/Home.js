@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, ScrollView, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { Text, View, Image, ScrollView, TouchableOpacity, Modal, Dimensions, ActivityIndicator  } from 'react-native';
 import styles from '../../styles';
 import { FontAwesome } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
@@ -15,7 +15,16 @@ const Home = () => {
 
   const [photos, setPhotos] = useState([]);
 
-  const [loadedPhotos, setLoadedPhotos] = useState(5);
+  //const [loadedPhotos, setLoadedPhotos] = useState(80);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0)
+  const scrollViewRef = useRef();
+
+  const scrollToTop = () => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+    }
+  };
 
   const openFullScreen = (photo) => {
     setSelectedPhoto(photo);
@@ -25,13 +34,27 @@ const Home = () => {
     setSelectedPhoto(null);
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+    scrollToTop();
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+      scrollToTop();
+    }
+  }; 
+
   const API_KEY = 'Z2czjJRDYYfOQIHRlsrFU8KjeQCnUOgz591mdW2WnibUuEjkKWcmrqVE'; // Replace with your Pexels API key
   const BASE_URL = 'https://api.pexels.com/v1/search';
   const QUERY = 'desktopwallpapers';
-  const PER_PAGE = 10; // Load 5 photos per page
+  const PER_PAGE = 80;
+
+  
 
   useEffect(() => {
-    fetch(`${BASE_URL}?query=${QUERY}&per_page=${loadedPhotos}`, {
+    fetch(`${BASE_URL}?page=${currentPage}&query=${QUERY}&per_page=${PER_PAGE}`, {
       headers: {
         Authorization: API_KEY,
       },
@@ -40,16 +63,17 @@ const Home = () => {
       .then((data) => {
         if (data.photos && data.photos.length > 0) {
           setPhotos(data.photos);
+          setTotalPages(data.total_results); // Set the total pages based on the API response
         }
       })
       .catch((error) => {
         console.error('Error fetching images:', error);
       });
-  }, [loadedPhotos]);
+  }, [currentPage]);
 
-  const handleLoadMore = () => {
-    setLoadedPhotos((prevLoadedPhotos) => prevLoadedPhotos + 5);
-  };
+  // const handleLoadMore = () => {
+  //   setLoadedPhotos((prevLoadedPhotos) => prevLoadedPhotos + 10);
+  // };
 
   const handleReport = (photo) => {
     console.log('Reporting image:', photo.id);
@@ -96,7 +120,11 @@ const Home = () => {
             color: 'white', borderColor: '#246bfd', padding: 9, borderWidth: 0, borderRadius: 0}}>
               Latest Wallpapers</Text>
         </View>
-      <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+        <ScrollView
+        ref={scrollViewRef} // Set the ref for the ScrollView
+        contentContainerStyle={styles.scrollContentContainer}
+        onContentSizeChange={() => {}} // Don't need handleContentSizeChange anymore
+      >
         
         {photos.length > 0 ? (
           photos.map((photo) => (
@@ -104,7 +132,7 @@ const Home = () => {
               <TouchableOpacity onPress={() => openFullScreen(photo)} style={[styles.postProfilePicture, { width: getImageWidthPercentage(90) }]}>
                 <Image
                   //source={{ uri: photo.download_url }}
-                  source={{ uri: photo.src.large }}
+                  source={{ uri: photo.src.medium }}
                   style={styles.image}
                   onError={(error) => console.error('Error loading image:', error)}
                 />
@@ -122,11 +150,32 @@ const Home = () => {
             </View>
           ))
         ) : (
-          <Text>Loading...</Text>
+          // <View style={styles.loaderScreen}>
+          //   <Text style={styles.loader}>Loading...</Text>
+          // </View>
+          <View style={styles.loaderScreen}>
+            <ActivityIndicator size="large" color="white" style={styles.loader} />
+          </View>
         )}
-        <TouchableOpacity onPress={handleLoadMore}>
+        {/* <TouchableOpacity onPress={handleLoadMore}>
           <Text style={styles.loadMore} >Load More</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View style={styles.paginationContainer}>
+          <TouchableOpacity
+            onPress={handlePreviousPage}
+            style={[styles.paginationButton]}
+            disabled={currentPage === 1}
+          >
+            <Text style={styles.paginationButtonText}>Previous</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleNextPage}
+            style={[styles.paginationButton]}
+            disabled={currentPage === Math.ceil(totalPages / PER_PAGE)}
+          >
+            <Text style={styles.paginationButtonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
       {downloadSuccess && (
         <Modal animationType="fade" transparent visible={downloadSuccess}>
