@@ -92,9 +92,9 @@ const Nature = () => {
             <StatusBar style="auto" />
 
             <ScrollView contentContainerStyle={styles.scrollContentContainer}>
-                <View>
+                {/* <View>
                     <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, color: 'green' }}>Latest Wallpapers</Text>
-                </View>
+                </View> */}
                 {photos.length > 0 ? (
                     photos.map((photo) => (
                         <View key={photo.id} style={styles.imageContainer}>
@@ -108,11 +108,11 @@ const Nature = () => {
                             </TouchableOpacity>
                             <View style={styles.buttonsContainer}>
                                 <TouchableOpacity onPress={() => handleDownload(photo)} style={styles.button}>
-                                    <FontAwesome name="download" size={20} color="black" />
+                                    <FontAwesome name="download" size={20} color="white" />
                                     <Text style={styles.buttonText}>Download</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => handleReport(photo)} style={styles.button}>
-                                    <FontAwesome name="exclamation-circle" size={20} color="black" />
+                                    <FontAwesome name="exclamation-circle" size={20} color="white" />
                                     <Text style={styles.buttonText}>Report</Text>
                                 </TouchableOpacity>
                             </View>

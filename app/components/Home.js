@@ -27,8 +27,8 @@ const Home = () => {
 
   const API_KEY = 'Z2czjJRDYYfOQIHRlsrFU8KjeQCnUOgz591mdW2WnibUuEjkKWcmrqVE'; // Replace with your Pexels API key
   const BASE_URL = 'https://api.pexels.com/v1/search';
-  const QUERY = 'nature';
-  const PER_PAGE = 5; // Load 5 photos per page
+  const QUERY = 'desktopwallpapers';
+  const PER_PAGE = 10; // Load 5 photos per page
 
   useEffect(() => {
     fetch(`${BASE_URL}?query=${QUERY}&per_page=${loadedPhotos}`, {
@@ -90,11 +90,14 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-
-      <ScrollView contentContainerStyle={styles.scrollContentContainer}>
-        <View>
-          <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, color: 'green' }}>Latest Wallpapers</Text>
+      <View>
+          <Text style={{ 
+            fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, backgroundColor: '#323740',
+            color: 'white', borderColor: '#246bfd', padding: 9, borderWidth: 0, borderRadius: 0}}>
+              Latest Wallpapers</Text>
         </View>
+      <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+        
         {photos.length > 0 ? (
           photos.map((photo) => (
             <View key={photo.id} style={styles.imageContainer}>
@@ -108,11 +111,11 @@ const Home = () => {
               </TouchableOpacity>
               <View style={styles.buttonsContainer}>
                 <TouchableOpacity onPress={() => handleDownload(photo)} style={styles.button}>
-                  <FontAwesome name="download" size={20} color="black" />
+                  <FontAwesome name="download" size={20} color="white" />
                   <Text style={styles.buttonText}>Download</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleReport(photo)} style={styles.button}>
-                  <FontAwesome name="exclamation-circle" size={20} color="black" />
+                  <FontAwesome name="exclamation-circle" size={20} color="white" />
                   <Text style={styles.buttonText}>Report</Text>
                 </TouchableOpacity>
               </View>

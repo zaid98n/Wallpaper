@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     // paddingTop: 20, 
-    //backgroundColor: 'black',
+    backgroundColor: '#181a20',
   },
   scrollContentContainer: {
     flexGrow: 1,
@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    backgroundColor: 'rgba(0, 0, 0, 0.1)', // Black background for each image and buttons
+    //backgroundColor: 'rgba(0, 0, 0, 0.1)', // Black background for each image and buttons
+    backgroundColor: '#323740',
     marginVertical: 15,
     borderRadius: 30,
     width: '90%'
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     marginLeft: 5,
+    color: 'white',
   },
   modalContainer: {
     flex: 1,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 20,
     color: 'white',
-    backgroundColor: 'green',
+    backgroundColor: '#246bfd',
     //borderColor: 'Black',
     //borderWidth: 2,
     borderRadius: 50,

@@ -12,31 +12,70 @@ import styles from '../../styles'
 
 const Tab = createMaterialTopTabNavigator();
 
+// const AppNavigator = () => {
+//     return (
+//         <Tab.Navigator style={{ paddingTop: StatusBar.currentHeight }}>
+//             <Tab.Screen
+//                 options={{ 
+//                     title: ({ focused }) =>
+//                         <FontAwesome name="home" size={24}  color={focused ? 'orange' : 'black'} />
+//                 }}  component={Home} name='Home' />
+//             <Tab.Screen
+//                 options={{
+//                     title: ({ focused }) =>
+//                         <FontAwesome name="bars" size={24} color={focused ? 'blue' : 'black'} />
+//                 }} component={Feeds} name='Feeds' />
+//             {/* <Tab.Screen
+//                 options={{
+//                     title: ({ focused }) =>
+//                         <FontAwesome name="search" size={24} color={focused ? 'blue' : 'black'} />
+//                 }} component={Search} name='Search' /> */}
+//             {/* <Tab.Screen
+//                 options={{
+//                     title: ({ focused }) =>
+//                         <FontAwesome name="comments" size={24} color={focused ? 'blue' : 'black'} />
+//                 }} component={Chat} name='Chat' /> */}
+//         </Tab.Navigator>
+//     )
+// }
+
+// export default AppNavigator;
+
 const AppNavigator = () => {
     return (
-        <Tab.Navigator style={{ paddingTop: StatusBar.currentHeight }}>
-            <Tab.Screen 
-                options={{
-                    title: ({ focused }) =>
-                        <FontAwesome name="home" size={24} color={focused ? 'blue' : 'black'} />
-                }} component={Home} name='Home' />
-            <Tab.Screen
-                options={{
-                    title: ({ focused }) =>
-                        <FontAwesome name="bars" size={24} color={focused ? 'blue' : 'black'} />
-                }} component={Feeds} name='Feeds' />
-            {/* <Tab.Screen
-                options={{
-                    title: ({ focused }) =>
-                        <FontAwesome name="search" size={24} color={focused ? 'blue' : 'black'} />
-                }} component={Search} name='Search' /> */}
-            {/* <Tab.Screen
-                options={{
-                    title: ({ focused }) =>
-                        <FontAwesome name="comments" size={24} color={focused ? 'blue' : 'black'} />
-                }} component={Chat} name='Chat' /> */}
+      <View style={{ flex: 1, backgroundColor: 'your-desired-color' }}>
+        <StatusBar translucent backgroundColor="transparent" />
+        <Tab.Navigator style={{ paddingTop: StatusBar.currentHeight }}
+          screenOptions={{
+            "tabBarStyle": {
+              "backgroundColor": "#181a20"
+            },
+            tabBarIndicatorStyle: {
+              backgroundColor: 'white', // Set the color of the tab indicator to white
+            },
+          }}
+        >
+          <Tab.Screen
+            options={{
+              title: ({ focused }) => (
+                <FontAwesome name="home" size={24} color={focused ? 'white' : 'white'} />
+              ),
+            }}
+            component={Home}
+            name="Home"
+          />
+          <Tab.Screen
+            options={{
+              title: ({ focused }) => (
+                <FontAwesome name="bars" size={24} color={focused ? 'white' : 'white'} />
+              ),
+            }}
+            component={Feeds}
+            name="Feeds"
+          />
         </Tab.Navigator>
-    )
-}
-
-export default AppNavigator;
+      </View>
+    );
+  };
+  
+  export default AppNavigator;

@@ -7,7 +7,7 @@ import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import FullScreenImage from './FullScreenImage';
 
-const Happiness = () => {
+const Sadness = () => {
 
     const [downloadSuccess, setDownloadSuccess] = useState(false);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -27,7 +27,7 @@ const Happiness = () => {
 
     const API_KEY = 'Z2czjJRDYYfOQIHRlsrFU8KjeQCnUOgz591mdW2WnibUuEjkKWcmrqVE'; // Replace with your Pexels API key
     const BASE_URL = 'https://api.pexels.com/v1/search';
-    const QUERY = 'happiness';
+    const QUERY = 'sadness';
     const PER_PAGE = 5; // Load 5 photos per page
 
     useEffect(() => {
@@ -145,4 +145,4 @@ const Happiness = () => {
     );
 };
 
-export default Happiness;
+export default Sadness;
