@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, ScrollView, TouchableOpacity, Modal, Dimensions, ActivityIndicator  } from 'react-native';
+import { Text, View, Image, ScrollView, TouchableOpacity, Modal, Dimensions, ActivityIndicator } from 'react-native';
 import styles from '../../styles';
 import { FontAwesome } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   const openFullScreen = (photo) => {
-    setSelectedPhoto(photo);1
+    setSelectedPhoto(photo); 1
   };
 
   const closeFullScreen = () => {
@@ -44,14 +44,14 @@ const Home = () => {
       setCurrentPage((prevPage) => prevPage - 1);
       scrollToTop();
     }
-  }; 
+  };
 
   const API_KEY = 'Z2czjJRDYYfOQIHRlsrFU8KjeQCnUOgz591mdW2WnibUuEjkKWcmrqVE'; // Replace with your Pexels API key
   const BASE_URL = 'https://api.pexels.com/v1/search';
   const QUERY = 'desktopwallpapers';
   const PER_PAGE = 80;
 
-  
+
 
   useEffect(() => {
     fetch(`${BASE_URL}?page=${currentPage}&query=${QUERY}&per_page=${PER_PAGE}`, {
@@ -114,18 +114,19 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {/* <View>
-          <Text style={{ 
-            fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, backgroundColor: '#323740',
-            color: 'white', borderColor: '#246bfd', padding: 9, borderWidth: 0, borderRadius: 0}}>
-              Latest Wallpapers</Text>
-        </View> */}
-        <ScrollView
+      <View>
+        <Text style={{
+          fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20, backgroundColor: '#323740',
+          color: 'white', borderColor: '#246bfd', padding: 9, borderWidth: 0, borderRadius: 0
+        }}>
+          Latest Wallpapers</Text>
+      </View>
+      <ScrollView
         ref={scrollViewRef} // Set the ref for the ScrollView
         contentContainerStyle={styles.scrollContentContainer}
-        onContentSizeChange={() => {}} // Don't need handleContentSizeChange anymore
+        onContentSizeChange={() => { }} // Don't need handleContentSizeChange anymore
       >
-        
+
         {photos.length > 0 ? (
           photos.map((photo) => (
             <View key={photo.id} style={styles.imageContainer}>
