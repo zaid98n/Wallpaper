@@ -28,10 +28,16 @@
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "package": "com.zaid.wallpapers"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3169ec98-ce6b-4ce1-adb5-c9619f69c237"
+      }
     }
   }
 }
